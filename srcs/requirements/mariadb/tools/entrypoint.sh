@@ -1,0 +1,13 @@
+#!/bin/bash
+
+service mariadb start
+
+mariadb -u root -e \
+"CREATE DATABASE IF NOT EXISTS $WORDPRESS_DATABASE;" \
+"CREATE USER IF NOT EXISTS '$WORDPRESS_USER'@'%' IDENTIFIED BY '$WORDPRESS_PASSWORD';" \
+"GRANT ALL PRIVILEGES ON '$WORDPRESS_DATABASE.*' TO '$WORDPRESS_USER'@'%';" \
+"FLUSH PRIVILEGES;" \
+service mariadb stop
+
+exec mysqld_safe
+
