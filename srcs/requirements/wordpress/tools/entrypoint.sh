@@ -17,12 +17,6 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 	sed -i "s/password_here/$WP_ADMIN_PWD/g" wp-config.php
 	sed -i "s/localhost/$WP_HOST/g" wp-config.php
 
-        # wp config create --allow-root \
-        #     --dbname=$WP_DATABASE \
-        #     --dbuser=$WP_ADMIN_USER \
-        #     --dbpass=$WP_ADMIN_PWD \
-        #     --dbhost=$WP_HOST \
-
         wp core install --allow-root \
             --url=$DOMAIN_NAME \
             --title=$TITLE \
