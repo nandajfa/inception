@@ -6,7 +6,7 @@
 #    By: jefernan <jefernan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/16 15:54:37 by jefernan          #+#    #+#              #
-#    Updated: 2023/08/25 09:30:35 by jefernan         ###   ########.fr        #
+#    Updated: 2023/08/25 17:31:17 by jefernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ all: up
 
 up:
 	@echo "$(GREEN)** Files for volumes ** $(RESET)"
-	@mkdir -p $(VOLUME)/wordpress
-	@mkdir -p $(VOLUME)/mariadb
+	@sudo mkdir -p $(VOLUME)/wordpress
+	@sudo mkdir -p $(VOLUME)/mariadb
 	@echo "$(GREEN)** Compose Up ** $(RESET)"
 	@docker-compose --file=$(COMPOSE) up --build --detach
-	grep $(LOGIN).42.fr /etc/hosts || echo "127.0.0.1 $(LOGIN).42.fr" >> /etc/hosts
+	@grep $(LOGIN).42.fr /etc/hosts || echo "127.0.0.1 $(LOGIN).42.fr" >> /etc/hosts
 
 down:
 	@echo "$(GREEN)** Compose down ** $(RESET)"
@@ -41,25 +41,25 @@ stop:
 
 ls:
 	@echo "$(GREEN)**** List containers ****$(RESET)"
-	@docker ps -a
+	@docker container ls -a
 	@echo "$(GREEN)**** List Images ****$(RESET)"
-	@docker image ls -a
+	@docker images ls -a
 	@echo "$(GREEN)**** List Volumes ****$(RESET)"
 	@docker volume ls
 	@echo "$(GREEN)**** List Network ****$(RESET)"
 	@docker network ls
 
-clean: stop down
+clean: stop
 
 fclean: clean
 	@echo "$(GREEN)** Removing containers... **$(RESET)"
-	@docker rm `docker ps -qa`
+	@docker ps -qa | xargs docker rm
 	@echo "$(GREEN)** Removing images... **$(RESET)"
-	@docker rmi -f `docker images -qa`
+	@docker rmi -f $$(docker images -qa)
 	@echo "$(GREEN)** Removing volumes... **$(RESET)"
-	@docker volume rm `docker volume ls -q`
-	@echo "$(GREEN)** Removing networks... **$(RESET)"
-	@docker network rm `docker network ls -q`
+	@docker volume rm $$(docker volume ls -q)
+	@echo "$(GREEN)** Removing network... **$(RESET)"
+	@docker network rm inception
 	@echo "$(GREEN)** Removing data... **$(RESET)"
 	@sudo rm -rf $(VOLUME)
 	

@@ -33,6 +33,9 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 
         wp user create --allow-root --user_login=$WP_USER --user_email=$WP_EMAIL --role=author --user_pass=$WP_PASSWORD
 
+        wp plugin uninstall akismet hello --allow-root
+        wp plugin update --all --allow-root
+        
         chown -R www-data:www-data "$WP_PATH"
         find "$WP_PATH" -type d -exec chmod 755 {} \;
         find "$WP_PATH" -type f -exec chmod 644 {} \;
