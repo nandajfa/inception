@@ -1,13 +1,26 @@
 #!/bin/bash
 
-service mariadb start
+# service mariadb start
+mysqld_safe --skip-syslog &
 
-mariadb -u root -e \
-"CREATE DATABASE IF NOT EXISTS $WORDPRESS_DATABASE;" \
-"CREATE USER IF NOT EXISTS '$WORDPRESS_USER'@'%' IDENTIFIED BY '$WORDPRESS_PASSWORD';" \
-"GRANT ALL PRIVILEGES ON '$WORDPRESS_DATABASE.*' TO '$WORDPRESS_USER'@'%';" \
-"FLUSH PRIVILEGES;" \
-service mariadb stop
+sleep 5
 
-exec mysqld_safe
+# if ! mysql -e "USE $MYSQL_DATABASE;";
 
+# then
+
+    mysql -e "CREATE DATABASE $WP_DATABASE;"
+    mysql -e "CREATE USER '$WP_ADMIN_USER'@'%' IDENTIFIED BY '$WP_ADMIN_PWD';"
+    mysql -e "GRANT ALL PRIVILEGES ON $WP_DATABASE.* TO '$WP_ADMIN_USER'@'%';"
+    mysql -e "FLUSH PRIVILEGES;"
+
+#     echo "Database created."
+# else
+#     echo "Database '$MYSQL_DATABASE' has already been created."
+# fi
+
+mysqladmin shutdown
+
+sleep 5
+
+exec mariadbd
