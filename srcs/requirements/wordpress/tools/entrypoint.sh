@@ -1,10 +1,6 @@
 #!/bin/bash
 
-WP_PATH="/var/www/html"
-
 if [ ! -f "/var/www/html/wp-config.php" ]; then
-
-        cd /var/www/html
 
         rm -rf *.*
 
@@ -29,10 +25,9 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 
         wp plugin uninstall akismet hello --allow-root
         wp plugin update --all --allow-root
-        
-        chown -R www-data:www-data "$WP_PATH"
-        find "$WP_PATH" -type d -exec chmod 755 {} \;
-        find "$WP_PATH" -type f -exec chmod 644 {} \;
+
+        chown -R www-data:www-data /var/www/html
+
 fi
 
 exec php-fpm7.4 -F

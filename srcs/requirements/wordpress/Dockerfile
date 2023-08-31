@@ -6,9 +6,6 @@ RUN apt update && apt upgrade -y && \
     apt install -y php7.4 php7.4-fpm php7.4-cli php7.4-curl php7.4-mysql php7.4-mbstring php7.4-xml php7.4-gd \
     wget mariadb-client nano
 
-# RUN wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  \ 
-#     && chmod +x /usr/local/bin/wp
-
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
         --output-document=/usr/local/bin/wp \
         && chmod +x /usr/local/bin/wp
