@@ -45,6 +45,11 @@ Docker can build images automatically by reading the instructions from a Dockerf
 - [Docker Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=pg19Z8LL06w)
 - [Notion 42](https://www.notion.so/lalex-ku/Inception-d74c98cb5fcb4aaf91c19dac01a7310e)
 - [Never install locally](https://www.youtube.com/watch?v=J0NuOlA2xDc&t=340s)
+- [WP-CLI](https://king.host/wiki/artigo/instalar-wordpress-wpcli/)
+- [PHP-FPM](https://www.node35.com/how-to-install-multiphp-fpm-php-7-4-php-8-0-php-8-1-on-debian-11-bullseye/)
+- [Configuring MariaDB with Option Files](https://mariadb.com/kb/en/configuring-mariadb-with-option-files/#option-prefixes)
+- [wp-config.php](https://codex.wordpress.org/pt-br:Editando_wp-config.php)
+- [DESCOMPLICANDO O DOCKER](https://www.youtube.com/watch?v=Wm99C_f7Kxw&list=PLf-O3X2-mxDn1VpyU2q3fuI6YYeIWp5rR)
 
 ## Skills
 
